@@ -117,12 +117,11 @@ async function contribute(userData, agent) {
 async function processUser(userData, proxy) {
     try {
         const agent = await createProxyAgent(proxy);
+        const info = await fetchInfoData(userData, agent)
         const profile = await fetchAuthData(userData, agent);
         const username = profile?.result?.username || 'Unknown';
 
-        const infoData = await fetchInfoData(userData, agent);
         const powerData = await fetchPowerData(userData, agent);
-
         const hivera = powerData?.result?.profile?.HIVERA || 0;
         let power = powerData?.result?.profile?.POWER || 0;
 
@@ -140,9 +139,10 @@ async function processUser(userData, proxy) {
             }
         }
 
-        log.warn(`User ${username} does not have enough power to mine.`);
+        log.warn(`User ${username} does not have enough power to mine. Cooling down for 35 minutes.`);
+        await new Promise(resolve => setTimeout(resolve, 35 * 60 * 1000));
     } catch (error) {
-        log.error(`Error processing user ${userData}:`, error);
+        log.error(`Error processing user ${userData} with proxy ${proxy}:`, error);
     }
 }
 
@@ -150,21 +150,24 @@ async function main() {
     log.info(beddu);
     const userDatas = await readUserFile('users.txt');
     const proxyList = await readProxyFile('proxies.txt');
-    
+
     if (userDatas.length === 0) {
         log.error('No user data found in the file.');
         process.exit(0);
     }
 
+    if (proxyList.length === 0) {
+        log.warn('No proxies found in the file. Proceeding without proxies.');
+    }
+
     while (true) {
         log.info('Starting processing for all users...');
-        await Promise.all(userDatas.map((userData, index) => {
-            const proxy = proxyList[index % proxyList.length];
-            return processUser(userData, proxy);
+        await Promise.all(userDatas.map(async (userData, index) => {
+            const proxy = proxyList.length > 0 ? proxyList[index % proxyList.length] : null;
+            await processUser(userData, proxy);
         }));
 
-        log.warn('Power is not enough for all users, cooldown 35 minutes...');
-        await new Promise(resolve => setTimeout(resolve, 35 * 60 * 1000));
+        log.info('All users processed. Restarting the loop...');
     }
 }
 
