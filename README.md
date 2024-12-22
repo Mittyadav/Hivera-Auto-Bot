@@ -22,7 +22,7 @@ A decentralized network power by @ton_blockchain, backed by @Ton_Incubator. Cont
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/airdropinsiders/Hivera-Auto-Bot.git
+   git clone https://github.com/Mittyadav/Hivera-Auto-Bot.git
    cd Hivera-Auto-Bot
    ```
 2. Install dependencies:
