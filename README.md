@@ -1,5 +1,5 @@
 # HIVERA AUTO BOT
-A decentralized network power by @ton_blockchain, backed by @Ton_Incubator. Contribute to powering AI innovation worldwide. [https://t.me/Hiverabot](https://t.me/Hiverabot/app?startapp=2b6a4dfc8)
+A decentralized network power by @ton_blockchain, backed by @Ton_Incubator. Contribute to powering AI innovation worldwide. [https://t.me/Hiverabot](https://t.me/Hiverabot/app?startapp=1405c09f8)
 
 ## Features
 
@@ -12,7 +12,7 @@ A decentralized network power by @ton_blockchain, backed by @Ton_Incubator. Cont
 - **Node.js**: Ensure you have Node.js installed.
 - **npm**: Ensure you have npm installed.
 - **Hivera Jwt**: follow instructions below to get
-- **Open MiniApp HiveraBot** : [https://t.me/Hiverabot](https://t.me/Hiverabot/app?startapp=2667123d8)
+- **Open MiniApp HiveraBot** : [https://t.me/Hiverabot](https://t.me/Hiverabot/app?startapp=1405c09f8)
 - inspect or just click F12 and find application
 - in Local Storage find Hivera_jwt and copy it.
     ![token](image.png)
